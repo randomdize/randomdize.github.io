@@ -1,0 +1,85 @@
+.header .container
+{
+    padding-top: 3rem;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.page-nav
+{
+    text-align: center;
+}
+
+.page-nav a
+{
+    margin-right: 2rem;
+}
+
+
+.page-nav span
+{
+    margin-right: 2rem;
+}
+
+body {
+    line-height:1.8;
+    letter-spacing: 0.02em;
+    font-family: 'Noto Serif TC', serif;
+    font-size: 21px;
+    color: #454545;
+    margin-bottom: 3rem;
+}
+
+a {
+    word-break: break-all;
+}
+
+h1 {
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 0px;
+}
+
+.column h1 {
+    font-size: 21px;
+    line-height: 1;
+}
+
+header { 
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+article {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+section {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+img {
+    max-width: 100%;
+}
+
+code {
+    font-size: 1.2em;
+    padding: 0.12em;
+}
+
+pre {
+    border-style: solid;
+    border: 1px;
+    padding: 6px;
+    background-color: #000000;
+    overflow: auto;
+}
+
+pre code {
+    color: #FFFFFF;
+    font-size: 1.25em;
+    overflow: auto; 
+    line-height: 1.1;
+}
