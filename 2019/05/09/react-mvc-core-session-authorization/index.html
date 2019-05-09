@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head><meta name="generator" content="Hexo 3.8.0">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="about:blank">
+        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
+        <link rel="stylesheet" href="/style.css">
+        <title>Single Page Application session-based 驗證 - Code Apprentice</title>
+   </head>
+    <body>
+        <header>
+            <h1><a href="/">Code Apprentice</a></h1>
+            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
+        </header>
+        <article>
+    <header>
+        <h1>Single Page Application session-based 驗證</h1>
+        <time>2019-05-09</time>
+    </header>
+    <p></p><p>基本上談到 SPA 大部分人推崇的會是使用 JWT 做驗證，不過要用 JWT 做驗證要考慮到的事情可多的。是不是值得把原本 session 作的事情拿回來自己做也是需要考慮的。<br>後來才發現其實也是可以直接使用原來的 cookie-session 的驗證也是 ok，而且反而簡單很多。<br>也許是因為太簡單所以網路上查不太到資料吧，所以在這邊紀錄一下。</p>
+<p>直接參照 M$ 官方網站的教學</p>
+<p>在 <code>startup.cs</code> 內的 <code>ConfigureService</code> 中加入</p>
+<pre><code>services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =&gt; {
+        options.Cookie.name = &quot;CookieName&quot;;
+        options.Cookie.path = &quot;/&quot;;
+        options.Events.OnRedirectToLogin = (context) =&gt;
+        {
+            // 把未登入的自動轉頁複寫掉
+            context.Response.StatusCode = 401;
+            return Task.CompletedTask;
+        }
+    });
+</code></pre><p>然後在 <code>Configure</code> 中加在 <code>usespaservice</code> 上面</p>
+<pre><code>app.UseAuthentication();
+</code></pre><p>基本上就跟 MVC 平常一樣。</p>
+<h1 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h1><pre><code>var claims = new List&lt;Claim&gt;
+{
+    new Claim(ClaimTypes.Name, user.Email),
+    new Claim(&quot;FullName&quot;, user.FullName),
+    new Claim(ClaimTypes.Role, &quot;Administrator&quot;),
+};
+
+var claimsIdentity = new ClaimsIdentity(
+    claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+await HttpContext.SignInAsync(
+    CookieAuthenticationDefaults.AuthenticationScheme,
+    new ClaimsPrincipal(claimsIdentity));
+</code></pre><h1 id="登出"><a href="#登出" class="headerlink" title="登出"></a>登出</h1><pre><code>await HttpContext.SignOutAsync(
+    CookieAuthenticationDefaults.AuthenticationScheme);
+</code></pre><h1 id="JS-fetch"><a href="#JS-fetch" class="headerlink" title="JS fetch"></a>JS fetch</h1><pre><code>fetch(url, {
+  credentials: &quot;same-origin&quot;
+}).then(...);
+</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions" target="_blank" rel="noopener">http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions</a><br><a href="https://docs.microsoft.com/zh-tw/aspnet/core/security/authentication/cookie" target="_blank" rel="noopener">https://docs.microsoft.com/zh-tw/aspnet/core/security/authentication/cookie</a><br><a href="https://stackoverflow.com/questions/46247163/net-core-2-0-cookie-authentication-do-not-redirect" target="_blank" rel="noopener">https://stackoverflow.com/questions/46247163/net-core-2-0-cookie-authentication-do-not-redirect</a><br><a href="https://stackoverflow.com/questions/34558264/fetch-api-with-cookie" target="_blank" rel="noopener">https://stackoverflow.com/questions/34558264/fetch-api-with-cookie</a></p>
+<p></p>
+</article>
+
+    </body>
+</html>

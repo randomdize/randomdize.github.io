@@ -6,10 +6,37 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://randomdize.github.io/"/>
-  <updated>2019-04-16T11:07:04.822Z</updated>
+  <updated>2019-05-09T14:09:35.218Z</updated>
   <id>http://randomdize.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Single Page Application session-based 驗證</title>
+    <link href="http://randomdize.github.io/2019/05/09/react-mvc-core-session-authorization/"/>
+    <id>http://randomdize.github.io/2019/05/09/react-mvc-core-session-authorization/</id>
+    <published>2019-05-09T13:23:43.000Z</published>
+    <updated>2019-05-09T14:09:35.218Z</updated>
+    
+    <content type="html"><![CDATA[<p>基本上談到 SPA 大部分人推崇的會是使用 JWT 做驗證，不過要用 JWT 做驗證要考慮到的事情可多的。是不是值得把原本 session 作的事情拿回來自己做也是需要考慮的。<br>後來才發現其實也是可以直接使用原來的 cookie-session 的驗證也是 ok，而且反而簡單很多。<br>也許是因為太簡單所以網路上查不太到資料吧，所以在這邊紀錄一下。</p><p>直接參照 M$ 官方網站的教學</p><p>在 <code>startup.cs</code> 內的 <code>ConfigureService</code> 中加入</p><pre><code>services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)    .AddCookie(options =&gt; {        options.Cookie.name = &quot;CookieName&quot;;        options.Cookie.path = &quot;/&quot;;        options.Events.OnRedirectToLogin = (context) =&gt;        {            // 把未登入的自動轉頁複寫掉            context.Response.StatusCode = 401;            return Task.CompletedTask;        }    });</code></pre><p>然後在 <code>Configure</code> 中加在 <code>usespaservice</code> 上面</p><pre><code>app.UseAuthentication();</code></pre><p>基本上就跟 MVC 平常一樣。</p><h1 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h1><pre><code>var claims = new List&lt;Claim&gt;{    new Claim(ClaimTypes.Name, user.Email),    new Claim(&quot;FullName&quot;, user.FullName),    new Claim(ClaimTypes.Role, &quot;Administrator&quot;),};var claimsIdentity = new ClaimsIdentity(    claims, CookieAuthenticationDefaults.AuthenticationScheme);await HttpContext.SignInAsync(    CookieAuthenticationDefaults.AuthenticationScheme,    new ClaimsPrincipal(claimsIdentity));</code></pre><h1 id="登出"><a href="#登出" class="headerlink" title="登出"></a>登出</h1><pre><code>await HttpContext.SignOutAsync(    CookieAuthenticationDefaults.AuthenticationScheme);</code></pre><h1 id="JS-fetch"><a href="#JS-fetch" class="headerlink" title="JS fetch"></a>JS fetch</h1><pre><code>fetch(url, {  credentials: &quot;same-origin&quot;}).then(...);</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions" target="_blank" rel="noopener">http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions</a><br><a href="https://docs.microsoft.com/zh-tw/aspnet/core/security/authentication/cookie" target="_blank" rel="noopener">https://docs.microsoft.com/zh-tw/aspnet/core/security/authentication/cookie</a><br><a href="https://stackoverflow.com/questions/46247163/net-core-2-0-cookie-authentication-do-not-redirect" target="_blank" rel="noopener">https://stackoverflow.com/questions/46247163/net-core-2-0-cookie-authentication-do-not-redirect</a><br><a href="https://stackoverflow.com/questions/34558264/fetch-api-with-cookie" target="_blank" rel="noopener">https://stackoverflow.com/questions/34558264/fetch-api-with-cookie</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;基本上談到 SPA 大部分人推崇的會是使用 JWT 做驗證，不過要用 JWT 做驗證要考慮到的事情可多的。是不是值得把原本 session 作的事情拿回來自己做也是需要考慮的。&lt;br&gt;後來才發現其實也是可以直接使用原來的 cookie-session 的驗證也是 ok，而且
+      
+    
+    </summary>
+    
+    
+      <category term="mvc core" scheme="http://randomdize.github.io/tags/mvc-core/"/>
+    
+      <category term="asp.net core" scheme="http://randomdize.github.io/tags/asp-net-core/"/>
+    
+      <category term="javascript" scheme="http://randomdize.github.io/tags/javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>arch linux 筆記 - 安裝篇</title>
@@ -485,27 +512,6 @@ var someArray = [1, 2,
       <category term="osx" scheme="http://randomdize.github.io/tags/osx/"/>
     
       <category term="spotify" scheme="http://randomdize.github.io/tags/spotify/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>華碩ZenUI移除ZenLife</title>
-    <link href="http://randomdize.github.io/2016/03/07/how-to-remove-zenlife/"/>
-    <id>http://randomdize.github.io/2016/03/07/how-to-remove-zenlife/</id>
-    <published>2016-03-07T08:08:04.000Z</published>
-    <updated>2019-04-16T11:07:04.829Z</updated>
-    
-    <content type="html"><![CDATA[<p>在最近的 ZenUI Launcher 更新中加入了新功能 ZenLife Beta，有點像是 HTC BlinkFeed 或是 Google Now Launcher 的 Google Now 介面。個人是不排斥新功能，不過如果這功能不能用就是另外一回事了。</p><img src="/2016/03/07/how-to-remove-zenlife/zenlife_connection_error.png" title="連線失敗"><a id="more"></a><p>既然連不上線就把功能關閉也罷，結果找了一陣子才找到要怎麼關閉。</p><p>我想第一反應一定是右上角的設定按鈕，可惜不是，那邊是設定要顯示哪些資訊的設定畫面。</p><p>如果要關閉要這樣關：</p><ol><li>先找到桌面設定，可以從主畫面用向上手勢找到，這裡我是從App清單的右上角選單開啟。</li></ol><img src="/2016/03/07/how-to-remove-zenlife/launcher_setting_screen_1.png" title="選單"><ol><li>點選主畫面</li></ol><img src="/2016/03/07/how-to-remove-zenlife/launcher_setting_screen_2.png" title="桌面設定"><ol><li>將ZenLife取消勾選</li></ol><img src="/2016/03/07/how-to-remove-zenlife/launcher_setting_screen_3.png" title="主畫面"><p>如此一來就可以把ZenLife關閉了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在最近的 ZenUI Launcher 更新中加入了新功能 ZenLife Beta，有點像是 HTC BlinkFeed 或是 Google Now Launcher 的 Google Now 介面。個人是不排斥新功能，不過如果這功能不能用就是另外一回事了。&lt;/p&gt;
-&lt;img src=&quot;/2016/03/07/how-to-remove-zenlife/zenlife_connection_error.png&quot; title=&quot;連線失敗&quot;&gt;
-    
-    </summary>
-    
-    
-      <category term="zenui" scheme="http://randomdize.github.io/tags/zenui/"/>
     
   </entry>
   
