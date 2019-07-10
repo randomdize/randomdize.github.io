@@ -6,17 +6,42 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://randomdize.github.io/"/>
-  <updated>2019-05-09T14:09:35.218Z</updated>
+  <updated>2019-07-10T12:41:28.965Z</updated>
   <id>http://randomdize.github.io/</id>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>gogs 轉移 gitea - part3：gogs-git hooks</title>
+    <link href="http://randomdize.github.io/2019/07/10/gogs-to-gitea-git-hook/"/>
+    <id>http://randomdize.github.io/2019/07/10/gogs-to-gitea-git-hook/</id>
+    <published>2019-07-10T12:24:44.000Z</published>
+    <updated>2019-07-10T12:41:28.965Z</updated>
+    
+    <content type="html"><![CDATA[<p>tl;dr: gogs 轉移 gitea 後記得清掉 git hooks.<br>在經過一次資料庫維護之後發現一部分的 repo 變得無法 push。出現了奇怪的錯誤訊息。<br>類似 <code>gogs failed, git pre-receive hook declined</code><br>一開始以為是哪裡出錯，後來才發現明明是用 gitea 怎麼會出現 gogs 的錯誤訊息，不過又覺得 gitea 本來就是從 gogs fork 出來的所以也不疑有他。到後來才發現原來問題還是跟 gogs 有關。<br>gogs 本身預設會建立很多 git hooks，那這些 script 是放在 .git 之中，所以過去在轉移的時候也跟個轉移過去了。由於伺服器環境並不乾淨，所以 script 還是可以將 gogs 跑起來做該做的事情。而在資料庫維護之後就無法執行了。也就是為什麼錯誤訊息會提到 gogs。<br>gitea 有預設的 git hooks ，所以去相對應的地方將 git hooks 移除就好了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;tl;dr: gogs 轉移 gitea 後記得清掉 git hooks.&lt;br&gt;在經過一次資料庫維護之後發現一部分的 repo 變得無法 push。出現了奇怪的錯誤訊息。&lt;br&gt;類似 &lt;code&gt;gogs failed, git pre-receive hook decl
+      
+    
+    </summary>
+    
+    
+      <category term="gitea" scheme="http://randomdize.github.io/tags/gitea/"/>
+    
+      <category term="gogs" scheme="http://randomdize.github.io/tags/gogs/"/>
+    
+  </entry>
   
   <entry>
     <title>Single Page Application session-based 驗證</title>
     <link href="http://randomdize.github.io/2019/05/09/react-mvc-core-session-authorization/"/>
     <id>http://randomdize.github.io/2019/05/09/react-mvc-core-session-authorization/</id>
     <published>2019-05-09T13:23:43.000Z</published>
-    <updated>2019-05-09T14:09:35.218Z</updated>
+    <updated>2019-06-09T13:00:22.620Z</updated>
     
     <content type="html"><![CDATA[<p>基本上談到 SPA 大部分人推崇的會是使用 JWT 做驗證，不過要用 JWT 做驗證要考慮到的事情可多的。是不是值得把原本 session 作的事情拿回來自己做也是需要考慮的。<br>後來才發現其實也是可以直接使用原來的 cookie-session 的驗證也是 ok，而且反而簡單很多。<br>也許是因為太簡單所以網路上查不太到資料吧，所以在這邊紀錄一下。</p><p>直接參照 M$ 官方網站的教學</p><p>在 <code>startup.cs</code> 內的 <code>ConfigureService</code> 中加入</p><pre><code>services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)    .AddCookie(options =&gt; {        options.Cookie.name = &quot;CookieName&quot;;        options.Cookie.path = &quot;/&quot;;        options.Events.OnRedirectToLogin = (context) =&gt;        {            // 把未登入的自動轉頁複寫掉            context.Response.StatusCode = 401;            return Task.CompletedTask;        }    });</code></pre><p>然後在 <code>Configure</code> 中加在 <code>usespaservice</code> 上面</p><pre><code>app.UseAuthentication();</code></pre><p>基本上就跟 MVC 平常一樣。</p><h1 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h1><pre><code>var claims = new List&lt;Claim&gt;{    new Claim(ClaimTypes.Name, user.Email),    new Claim(&quot;FullName&quot;, user.FullName),    new Claim(ClaimTypes.Role, &quot;Administrator&quot;),};var claimsIdentity = new ClaimsIdentity(    claims, CookieAuthenticationDefaults.AuthenticationScheme);await HttpContext.SignInAsync(    CookieAuthenticationDefaults.AuthenticationScheme,    new ClaimsPrincipal(claimsIdentity));</code></pre><h1 id="登出"><a href="#登出" class="headerlink" title="登出"></a>登出</h1><pre><code>await HttpContext.SignOutAsync(    CookieAuthenticationDefaults.AuthenticationScheme);</code></pre><h1 id="JS-fetch"><a href="#JS-fetch" class="headerlink" title="JS fetch"></a>JS fetch</h1><pre><code>fetch(url, {  credentials: &quot;same-origin&quot;}).then(...);</code></pre><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions" target="_blank" rel="noopener">http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions</a><br><a href="https://docs.microsoft.com/zh-tw/aspnet/core/security/authentication/cookie" target="_blank" rel="noopener">https://docs.microsoft.com/zh-tw/aspnet/core/security/authentication/cookie</a><br><a href="https://stackoverflow.com/questions/46247163/net-core-2-0-cookie-authentication-do-not-redirect" target="_blank" rel="noopener">https://stackoverflow.com/questions/46247163/net-core-2-0-cookie-authentication-do-not-redirect</a><br><a href="https://stackoverflow.com/questions/34558264/fetch-api-with-cookie" target="_blank" rel="noopener">https://stackoverflow.com/questions/34558264/fetch-api-with-cookie</a></p>]]></content>
     
@@ -43,7 +68,7 @@
     <link href="http://randomdize.github.io/2019/01/23/archlinux/"/>
     <id>http://randomdize.github.io/2019/01/23/archlinux/</id>
     <published>2019-01-23T06:02:37.000Z</published>
-    <updated>2019-04-16T11:07:04.822Z</updated>
+    <updated>2019-06-09T13:00:22.618Z</updated>
     
     <content type="html"><![CDATA[<p>最近再度挑戰使用 arch linux<br>這次感覺比較成功，也慢慢讓系統進步到堪用的狀態，每次挑戰都學了一點東西，現在看起來終於發了芽。</p><p>安裝上基本上跟著 <a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Installation_guide</a> 走就好。<br>這裡做個筆記補充一下東西，下次就不用查東查西。</p><h1 id="無線網路"><a href="#無線網路" class="headerlink" title="無線網路"></a>無線網路</h1><p>這裡是用 <code>netctl</code> 這個軟體。還要加上 <code>wpa_supplicant</code> 及 <code>dhcpcd</code> 這兩個相依。</p><p><code>/etc/netctl/{profile name}</code></p><pre><code>Description=&#39;A simple WPA encrypted wireless connection using 256-bit PSK&#39;Interface=wlp2s2Connection=wirelessSecurity=wpaIP=dhcpESSID=your_essidKey=\&quot;64cf3ced850ecef39197bb7b7b301fc39437a6aa6c6a599d0534b16af578e04a</code></pre><p>不用被加密過得 key 嚇到，輸入明碼也可以。<br>Interface 欄位可以用 <code>ip link show</code> 來取得</p><p>之後用 <code>netctl start {profile name}</code> 連線，現在用 <code>ping</code> 指令應該可以ping到東西了。</p><h1 id="切硬碟"><a href="#切硬碟" class="headerlink" title="切硬碟"></a>切硬碟</h1><p>基本上採單一配置（純粹懶），網路上研究一下似乎獨立切 SWAP 效益不太大，用 SWAP file 就好。<br>Boot 切大一點比較重要，無論是 BIOS 或是 EFI 都不建議太低。自己是用 UEFI 直接切建議的最大值 512Mib(Mib 跟 MB 不太一樣，但差不多。) 原因在於過去經驗每次更新 kernel 它會把相關檔案放在 boot 下面，之前曾經切的太小導致更新一直失敗之後要定期去清把舊的 kernal 刪除。<br>還有 sector 大小（應該 fdisk 會問你）就用 <code>fdisk -l</code> 給的資訊去設定，如果沒有對齊會在後面的時候跳出警告。所以這邊就先設定好。</p><h1 id="掛載"><a href="#掛載" class="headerlink" title="掛載"></a>掛載</h1><p>記得把 /boot 掛上去<br><code># mount /dev/sdX2 /mnt</code><br><code># mkdir /mnt/efi</code><br><code># mount /dev/sdX1 /mnt/efi</code></p><h1 id="Boot-Loader"><a href="#Boot-Loader" class="headerlink" title="Boot Loader"></a>Boot Loader</h1><p>依照自己使用的主機板系統(BIOS or UEFI)跟檔案系統做選擇，基本上功能都大同小異。<br>自己是使用 <code>GRUB</code> 因為使用 <code>ext4</code> 這個檔案系統</p><h1 id="microcode"><a href="#microcode" class="headerlink" title="microcode"></a>microcode</h1><p>安裝完記得裝上 microcode ，這是 CPU 廠商的一些 patch。<br>依照廠商安裝 <code>amd-ucode</code> 或是 <code>intel-ucode</code></p><p><code>GRUB** 有自帶偵測更新</code><br><code># grub-mkconfig -o /boot/grub/grub.cfg</code></p><p>或是按照 wiki 的教學手動加也是可以。</p><h1 id="必要的東西"><a href="#必要的東西" class="headerlink" title="必要的東西"></a>必要的東西</h1><p>重開機前記得將之後要用的工具像是無線網路的程式，有些系統軟體在 usb 內有但是不會安裝到硬碟內，如果忘記了可以之後再用 usb 開機後 重新掛載後安裝</p><h1 id="設定開機"><a href="#設定開機" class="headerlink" title="設定開機"></a>設定開機</h1><p>如果有找不到 bootloader 的情況可能是這邊BIOS要設定<br>參照 <a href="/2016/11/04/how-to-boot-into-linux-on-v3-372/" title="How to boot into linux on v3-372 / 在 V3-372 上如何開機進入 Linux">How to boot into linux on v3-372 / 在 V3-372 上如何開機進入 Linux</a></p><h1 id="安裝後"><a href="#安裝後" class="headerlink" title="安裝後"></a>安裝後</h1><p>預設是 root 所以要先新增自己的帳號。<br><code># useradd -m {name}</code><br><code># passwd {name}</code></p><p>基本上 <code>sudo</code> 是必備的<br><code># pacman -S sudo</code> </p><p>裝好之後用 <code>visudo</code> 進入設定檔<br>把相關設定的註解移除<br>基本上應該是開啟 <code>wheel</code> 或 <code>sudo</code> 這兩個群組的權限，都開也可以。<br>建立這兩個群組<br><code># groupadd sudo</code><br><code># groudadd wheel</code><br>在將自己的使用者加入<br><code># gpasswd -a {user} {group}</code></p><h1 id="最後"><a href="#最後" class="headerlink" title="最後"></a>最後</h1><p>這樣差不多就可以用了，接下來就是安裝自己的環境了。<br>其實 arch wiki 已經寫得很清楚，大部分的資料都看 wiki 就可以解了。</p>]]></content>
     
@@ -67,7 +92,7 @@
     <link href="http://randomdize.github.io/2018/12/18/gitea-wiki-chinese-entry-issue/"/>
     <id>http://randomdize.github.io/2018/12/18/gitea-wiki-chinese-entry-issue/</id>
     <published>2018-12-18T08:39:24.000Z</published>
-    <updated>2019-04-16T11:07:04.829Z</updated>
+    <updated>2019-06-09T13:00:22.620Z</updated>
     
     <content type="html"><![CDATA[<p>之前轉移至 gitea 後發現無法開啟 wiki。測試了一下發現是因為編碼的問題所導致。如果要修復必須先將 wiki 檔名轉換成 URL 使用的 UTF-8 格式。gitea是將 wiki 頁面放在 repo 目錄下以 XXX.wiki.git 存放。因為也是 git 所以可以直接 clone 下來改檔名後再 push 回去就可以了。</p><p>因為也是 .md 檔，所以乾脆把 wiki 關了也是可以。因為 gitea 並沒有提供全域的關閉 wiki 功能所以必須要一個一個設定。如果不要的話可以直接執行以下  SQL 直接移除。</p><pre><code>DELETE FROM repo_unitWHERE type = 5-- 資料庫任何資料請自行負責，謝謝</code></pre><p>接下來還有什麼問題再看看。</p>]]></content>
     
@@ -90,7 +115,7 @@
     <link href="http://randomdize.github.io/2018/11/26/gogs-to-gitea/"/>
     <id>http://randomdize.github.io/2018/11/26/gogs-to-gitea/</id>
     <published>2018-11-26T09:11:42.000Z</published>
-    <updated>2019-04-16T11:07:04.829Z</updated>
+    <updated>2019-06-09T13:00:22.620Z</updated>
     
     <content type="html"><![CDATA[<p>Gitea 雖然源自於 Gogs ，不過要從 Gogs 轉移到 Gitea 卻是十分困難。官方給的教學中 Gogs 的版本要在 <code>0.9.146</code> 或是更舊才能轉移。目前使用的版本已經太新(<code>0.11.29.0727</code>)。想說直接按照官方的文件做，結果遇到 Gitea 在 <code>1.0</code> 中不支援 MSSQL 的窘境。<br>後來在自己試一試的情況下成功了，這邊紀錄一下是如何轉上去的。</p><p>環境</p><ul><li>Microsoft Windows Server 2012 R2</li><li>Microsoft SQL Server 2012</li><li>gogs 0.11.29.0727</li><li>gitea 1.6.0</li></ul><ol><li>乾淨安裝 gitea 1.6.0</li><li>第一次設定就正常設定，但是不要設定系統管理員帳號</li><li>直接將 gogs 資料庫中的資料匯入 gitea 資料庫（啟用識別插入，然後最後應該會失敗，不過大部分的資料都會成功）</li><li>接下來應該就可以用了，但是選取任何資源庫的時候會 404 error。</li><li>執行這段 SQL<pre><code>insert into repo_unit (repo_id, type, config, created_unix) select repository.id, types.*, &#39;{}&#39;, repository.created_unix from repositoryleft join repo_unit on repository.id=repo_id left join (select 1 as col1, 1 as col2UNION ALL select 2,2UNION ALL select 3,3UNION ALL select 4,4UNION ALL select 5,5) as types on (1=1)where repo_id is null;</code></pre></li><li>收工</li></ol><p>大致上可以用，不過沒有 webhook 之類的（先前的失敗停止的部分）<br>流程應該可以在更好才是。（例如僅匯入該匯入的資料表）</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/go-gitea/gitea/issues/1794#issuecomment-347831784" target="_blank" rel="noopener">Error while displaying public repo (404)</a></p>]]></content>
     
@@ -488,30 +513,6 @@ var someArray = [1, 2,
     
     
       <category term="android" scheme="http://randomdize.github.io/tags/android/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spotify 卡在歌手歌曲或專輯讀取畫面解決方法</title>
-    <link href="http://randomdize.github.io/2016/03/31/fix-spotify-loading-stuck/"/>
-    <id>http://randomdize.github.io/2016/03/31/fix-spotify-loading-stuck/</id>
-    <published>2016-03-31T02:09:50.000Z</published>
-    <updated>2019-04-16T11:07:04.824Z</updated>
-    
-    <content type="html"><![CDATA[<p>Spotify 一直是合法聽免費音樂的最佳管道，只是最近遇到這個問題。</p><img src="/2016/03/31/fix-spotify-loading-stuck/loading.png" title="卡住"><p>在歌曲歌手或專輯介面會一直卡在讀取畫面，其他功能卻是正常的。</p><a id="more"></a><p>原本以為是暫時性的問題，直到發現連旁邊 Radio 都跑出兩個之後才覺得可能是 Spotify 程式哪裡出問題了。<br>重新安裝程式後問題依然還在，Google 也找不到解決方法。最後清除了快取才回復正常。以下是自己清除快取的方式。</p><p>首先要先知道快取檔案放在電腦的哪裡</p><ol><li>右上角下拉式選單選擇設定</li><li>最下方顯示進階設定</li><li>找到快取路徑</li></ol><p>知道路徑之後就可以開始清除快取了</p><ol><li>關閉 Spotify</li><li>至快取路徑將 PersistentCache 內內容刪除。</li><li>啟動 Spotify</li></ol><p>Spotify 應該會重新建立快取，問題就解決了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Spotify 一直是合法聽免費音樂的最佳管道，只是最近遇到這個問題。&lt;/p&gt;
-&lt;img src=&quot;/2016/03/31/fix-spotify-loading-stuck/loading.png&quot; title=&quot;卡住&quot;&gt;
-&lt;p&gt;在歌曲歌手或專輯介面會一直卡在讀取畫面，其他功能卻是正常的。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="osx" scheme="http://randomdize.github.io/tags/osx/"/>
-    
-      <category term="spotify" scheme="http://randomdize.github.io/tags/spotify/"/>
     
   </entry>
   
