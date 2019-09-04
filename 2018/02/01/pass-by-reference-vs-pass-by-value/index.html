@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>pass-by-reference-vs-pass-by-value - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>pass-by-reference-vs-pass-by-value</h1>
+        <h2>pass-by-reference-vs-pass-by-value</h2>
         <time>2018-02-01</time>
     </header>
-    <p></p><p>在討論完 struct vs class 之後遇到了這樣的問題。</p>
+    <p>在討論完 struct vs class 之後遇到了這樣的問題。</p>
 <pre><code class="javascript">function clearArray(input) {
     input = [];
 }
@@ -47,8 +52,9 @@ public static void main()
 <p>不過在 c# 中可以再加上 <code>ref</code> 關鍵字來取得儲存位置的位置。JavaScript 中倒是不知道有沒有這種功能。</p>
 <p>過去學習記憶體和記憶體位置這類底層的東西這時候就可以派上用場了。</p>
 <p>之後查了一下發現網路上解釋得更好的文章，有興趣可以看看。<a href="https://medium.com/@TK_CodeBear/javascript-arrays-pass-by-value-and-thinking-about-memory-fffb7b0bf43" target="_blank" rel="noopener">連結</a></p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

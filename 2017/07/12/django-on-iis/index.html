@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>在 IIS 上架設 django - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>在 IIS 上架設 django</h1>
+        <h2>在 IIS 上架設 django</h2>
         <time>2017-07-12</time>
     </header>
-    <p></p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在 IIS 上執行 python 跟是一回事，在 IIS 上架設 django 又是另外一回事。而網路上的資源又更少了一點，經過各種搜尋後在這裡記下一些筆記。</p>
+    <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在 IIS 上執行 python 跟是一回事，在 IIS 上架設 django 又是另外一回事。而網路上的資源又更少了一點，經過各種搜尋後在這裡記下一些筆記。</p>
 <p>執行環境如下，每一項都會可能因為版本不同而有些許不同。這也是網路資源較難使上力的原因，因為解決方式的版本跟所用的版本可能不同而不適用。</p>
 <ul>
 <li>windows server 2012 R2</li>
@@ -69,8 +74,9 @@
 <li>path 末端加入 <code>;&lt;python安裝路徑&gt;;&lt;python安裝路徑&gt;\Scripts</code></li>
 </ol>
 <h1 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h1><p><a href="http://kronoskoders.logdown.com/posts/1074588-running-a-django-app-on-windows-iis" target="_blank" rel="noopener">Running a Django app on Windows IIS</a><br><a href="http://blog.mattwoodward.com/2016/07/running-django-application-on-windows.html" target="_blank" rel="noopener">Running a Django Application on Windows Server 2012 with IIS</a><br><a href="http://errormaker.blog74.fc2.com/blog-entry-24.html" target="_blank" rel="noopener">WindowsServer2012R2 + IIS + Django + wfastcgiの環境構築</a><br><a href="https://www.djangoproject.com" target="_blank" rel="noopener">django</a><br><a href="http://blog.fhps.tp.edu.tw/fhpsmis/?p=1015" target="_blank" rel="noopener">IIS7.5中的IUSR與IIS_IUSRS區別</a></p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>用 git 與 github 帳號連結 - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>用 git 與 github 帳號連結</h1>
+        <h2>用 git 與 github 帳號連結</h2>
         <time>2016-01-13</time>
     </header>
-    <p></p><p>最近在github上查看Commit歷史紀錄時發現這個。<br><img src="/2016/01/13/git-user-email-setting/not-link.png" title="github帳號未連結"><br>我預期應該要長這個樣子<br><img src="/2016/01/13/git-user-email-setting/link.png" title="github帳號連結"><br><a id="more"></a><br>原本以為在push到github時輸入帳號密碼就會紀錄是誰push的。不過上網Google了一下才發現原來是github會依照commit的email來連結帳號。</p>
+    <p>最近在github上查看Commit歷史紀錄時發現這個。<br><img src="/2016/01/13/git-user-email-setting/not-link.png" title="github帳號未連結"><br>我預期應該要長這個樣子<br><img src="/2016/01/13/git-user-email-setting/link.png" title="github帳號連結"><br><a id="more"></a><br>原本以為在push到github時輸入帳號密碼就會紀錄是誰push的。不過上網Google了一下才發現原來是github會依照commit的email來連結帳號。</p>
 <p>沒發現是因為過去都會安裝<a href="https://desktop.github.com/" target="_blank" rel="noopener">github-desktop</a>，在github-desktop登入後程式就會自動設定好了，而這次因為沒有安裝所以就沒有設定。在未設定email的情況下git會產生一個local的email。所以github對應不到就直接拿commit username來當基準了。</p>
 <p>解決的方式要在本機將github上註冊的email建立起來，github網頁上上是這樣寫<br><pre><code>$ git config --global user.email &quot;your_email@example.com&quot;</code></pre><br>設定完後可以這樣檢查</p>
 <pre><code>$ git config --global user.email</code></pre>
@@ -26,8 +31,9 @@
 <p>這樣是設定全域的email，也可以針對不同的git資料夾建立個別的email，在該資料夾中把指令的–global移除即可。</p>
 <p>為什麼設定email很重要呢？如果有參與其他開源專案的話，沒有與github帳號連結是不會在歷史紀錄中顯示出來的。無法在其他專案中留下足跡還是有點難過的啊。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h1><p><a href="https://help.github.com/articles/setting-your-email-in-git/" target="_blank" rel="noopener">Setting your email in Git</a></p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

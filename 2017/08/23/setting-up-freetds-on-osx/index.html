@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>在 OSX 設定 FreeTDS - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>在 OSX 設定 FreeTDS</h1>
+        <h2>在 OSX 設定 FreeTDS</h2>
         <time>2017-08-23</time>
     </header>
-    <p></p><p>過去一直以來 Unix-like 要跟 MSSQL 連線就是不容易，如果要跟舊版 MSSQL 連線就更難了，雖然有 unixODBC 和 FreeTDS 但這兩個設定的方式也不算容易。這裡當作筆記記錄下來。</p>
+    <p>過去一直以來 Unix-like 要跟 MSSQL 連線就是不容易，如果要跟舊版 MSSQL 連線就更難了，雖然有 unixODBC 和 FreeTDS 但這兩個設定的方式也不算容易。這裡當作筆記記錄下來。</p>
 <a id="more"></a>
 <h1 id="OSX"><a href="#OSX" class="headerlink" title="OSX:"></a>OSX:</h1><ol>
 <li><code>brew install unixodbc</code></li>
@@ -44,8 +49,9 @@
   PWD = &lt;pasaword&gt;
 </code></pre><h1 id="connectingString"><a href="#connectingString" class="headerlink" title="connectingString:"></a>connectingString:</h1><p>  <code>&quot;DRIVER={ExampleServer};DSN=;UID=;PWD=;Database=&quot;</code></p>
 <h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><p><a href="https://github.com/randomdize/freetds-example" target="_blank" rel="noopener">https://github.com/randomdize/freetds-example</a></p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

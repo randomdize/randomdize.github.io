@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>Javascript 的 Arrow function. - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>Javascript 的 Arrow function.</h1>
+        <h2>Javascript 的 Arrow function.</h2>
         <time>2017-01-22</time>
     </header>
-    <p></p><p>最近聽強者談論到在JS ES6 中使用 Arrow Function 要注意的事情，這事情跟 this 有關，趁這個機會對 this 做點了解。</p>
+    <p>最近聽強者談論到在JS ES6 中使用 Arrow Function 要注意的事情，這事情跟 this 有關，趁這個機會對 this 做點了解。</p>
 <a id="more"></a>
 <p>先來一張從 Crockford 大神演講中偷來的表</p>
 <table>
@@ -88,8 +93,9 @@ var p = new Person();</code></pre>
 <p>以上的例子中由於 Arrow function 中沒有自己的 this，所以 this 依照 function scope 規則會是 this.age = 0 的 this。</p>
 <p>看來沒把 JS 大全看完很難說自己能用得好啊。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h1><p><a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">Arrow function</a><br><a href="https://www.youtube.com/watch?v=ya4UHuXNygM&amp;list=PL7664379246A246CB&amp;index=3" target="_blank" rel="noopener">Crockford on JavaScript - Act III: Function the Ultimate</a></p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

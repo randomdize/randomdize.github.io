@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>從 Gogs 轉移至 Gitea - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>從 Gogs 轉移至 Gitea</h1>
+        <h2>從 Gogs 轉移至 Gitea</h2>
         <time>2018-11-26</time>
     </header>
-    <p></p><p>Gitea 雖然源自於 Gogs ，不過要從 Gogs 轉移到 Gitea 卻是十分困難。官方給的教學中 Gogs 的版本要在 <code>0.9.146</code> 或是更舊才能轉移。目前使用的版本已經太新(<code>0.11.29.0727</code>)。想說直接按照官方的文件做，結果遇到 Gitea 在 <code>1.0</code> 中不支援 MSSQL 的窘境。<br>後來在自己試一試的情況下成功了，這邊紀錄一下是如何轉上去的。</p>
+    <p>Gitea 雖然源自於 Gogs ，不過要從 Gogs 轉移到 Gitea 卻是十分困難。官方給的教學中 Gogs 的版本要在 <code>0.9.146</code> 或是更舊才能轉移。目前使用的版本已經太新(<code>0.11.29.0727</code>)。想說直接按照官方的文件做，結果遇到 Gitea 在 <code>1.0</code> 中不支援 MSSQL 的窘境。<br>後來在自己試一試的情況下成功了，這邊紀錄一下是如何轉上去的。</p>
 <p>環境</p>
 <ul>
 <li>Microsoft Windows Server 2012 R2</li>
@@ -46,8 +51,9 @@ where repo_id is null;
 </ol>
 <p>大致上可以用，不過沒有 webhook 之類的（先前的失敗停止的部分）<br>流程應該可以在更好才是。（例如僅匯入該匯入的資料表）</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/go-gitea/gitea/issues/1794#issuecomment-347831784" target="_blank" rel="noopener">Error while displaying public repo (404)</a></p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

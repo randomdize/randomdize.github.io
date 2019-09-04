@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>MVC core 做 Localization - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>MVC core 做 Localization</h1>
+        <h2>MVC core 做 Localization</h2>
         <time>2017-03-22</time>
     </header>
-    <p></p><p>過去不曾做過多國語言的支援，更不曾在 web 界做過，研究一下之後發現 Asp.net mvc core 也有提供工具。這裡做一下筆記。</p>
+    <p>過去不曾做過多國語言的支援，更不曾在 web 界做過，研究一下之後發現 Asp.net mvc core 也有提供工具。這裡做一下筆記。</p>
 <h1 id="基本認識"><a href="#基本認識" class="headerlink" title="基本認識"></a>基本認識</h1><p>一般多國語言的做法多是用替換字串的方式，然後用 Key/Value 的方式去做取代。目的是將顯示文字跟程式脫鉤，只要抽換文字檔案就可以更換顯示的文字而不需要修改程式，翻譯人員也可以直接透過這個檔案進行翻譯。基本的概念大概就是這樣。進階一點的就是某些從右讀到左的語言會需要 UI 翻轉之類的事情了。</p>
 <a id="more"></a>
 <h1 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h1><pre><code>public void ConfigureServices(IServiceCollection services)
@@ -63,8 +68,9 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 <p>MVC Core 1.1 後面有支援在 URL 上加入語言選項<br>ex. <code>http://localhost:5000/zh-tw/home/</code></p>
 <p>不過目前環境是 1.0 所以就沒再研究了，應該是要用 ActionFilter 之類的，不過就算這樣還是沒辦法用 Default Route mapping，參考連結內有更完整的教學。</p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization</a><br><a href="https://damienbod.com/2015/10/21/asp-net-5-mvc-6-localization/" target="_blank" rel="noopener">https://damienbod.com/2015/10/21/asp-net-5-mvc-6-localization/</a></p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

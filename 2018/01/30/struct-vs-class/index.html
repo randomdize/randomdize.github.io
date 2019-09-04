@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>struct vs class in csharp - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>struct vs class in csharp</h1>
+        <h2>struct vs class in csharp</h2>
         <time>2018-01-30</time>
     </header>
-    <p></p><p>前陣子因為個人主張<code>用 class 取代 struct</code>而討論到 csharp 中 struct 跟 class 有什麼不同。 </p>
+    <p>前陣子因為個人主張<code>用 class 取代 struct</code>而討論到 csharp 中 struct 跟 class 有什麼不同。 </p>
 <pre><code class="csharp">struct foo
 {
     public int id;
@@ -86,8 +91,9 @@ public void changeClassTestValueToZero(classTest input)
 </code></pre>
 <p>這就是過去在學習 cpp 中都會學到 pass by value 跟 pass by reference 的差異，而兩者行為上差異就是在這裡。<br>其他的語言可能會稱為 immutable 之類的，不過只要想一下是這是 value 還是 pointer 應該就知道了。</p>
 <p>知道這個小知識就可以避免掉一些不如預期的的狀況，這次又有更深的了解了，挺不錯。</p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

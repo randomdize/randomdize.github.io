@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>Claims-Based authentication in MVC Core - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>Claims-Based authentication in MVC Core</h1>
+        <h2>Claims-Based authentication in MVC Core</h2>
         <time>2016-11-30</time>
     </header>
-    <p></p><p>MVC5 以前時使用的 form authentication 在 MVC Core 被 Claims-based authentication 取代了。</p>
+    <p>MVC5 以前時使用的 form authentication 在 MVC Core 被 Claims-based authentication 取代了。</p>
 <p>首先加入 Middleware.</p>
 <pre><code>public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
     &#x2F;&#x2F;略
@@ -40,8 +45,9 @@ HttpContext.Authentication.SignInAsync(&quot;MyCookieMiddlewareInstance&quot;, c
 <p>取得 Claim 內容</p>
 <pre><code>var userId = User.FindFirst(&quot;Id&quot;).Value;</code></pre>
 <p>Reference:<br><a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie</a></p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

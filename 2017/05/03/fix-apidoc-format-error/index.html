@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>Use the Source - 解決 Api doc missing comma error - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>Use the Source - 解決 Api doc missing comma error</h1>
+        <h2>Use the Source - 解決 Api doc missing comma error</h2>
         <time>2017-05-03</time>
     </header>
-    <p></p><p>最近想要試試 api doc 產生器，於是 Google 一下後找到看起來很不錯的工具 Api doc。結果按照教學設定完之後一執行馬上就出現<br><code>Can not read: apidoc.json, please check the format (e.g. missing comma)</code></p>
+    <p>最近想要試試 api doc 產生器，於是 Google 一下後找到看起來很不錯的工具 Api doc。結果按照教學設定完之後一執行馬上就出現<br><code>Can not read: apidoc.json, please check the format (e.g. missing comma)</code></p>
 <p>我百思不得其解，也確認了 apidoc.json 有存在，逗號也都在。以為是自己格式弄錯，結果直接複製官方的文字也是出錯。</p>
 <p>遇到無法解決的問題，身為一位程式設計師當然趕緊 Google 一下，StackOverflow 一下，再上 github 看看 issue list。</p>
 <p>結果還是找不到什麼有用的資訊，要不就是有點鬼打牆的回覆。不過好在開發者有個 Debug log 模式，一看雖然不知道哪裡有問題，但似乎是拋出了一個例外。</p>
@@ -52,8 +57,9 @@
 <li>在 Windows 上使用在 unix 系統開發的東西時很容易遇到奇怪的問題</li>
 <li><code>Use the Source, Luke</code></li>
 </ol>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

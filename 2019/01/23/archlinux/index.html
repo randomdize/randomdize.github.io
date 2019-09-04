@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>arch linux 筆記 - 安裝篇 - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>arch linux 筆記 - 安裝篇</h1>
+        <h2>arch linux 筆記 - 安裝篇</h2>
         <time>2019-01-23</time>
     </header>
-    <p></p><p>最近再度挑戰使用 arch linux<br>這次感覺比較成功，也慢慢讓系統進步到堪用的狀態，每次挑戰都學了一點東西，現在看起來終於發了芽。</p>
+    <p>最近再度挑戰使用 arch linux<br>這次感覺比較成功，也慢慢讓系統進步到堪用的狀態，每次挑戰都學了一點東西，現在看起來終於發了芽。</p>
 <p>安裝上基本上跟著 <a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Installation_guide</a> 走就好。<br>這裡做個筆記補充一下東西，下次就不用查東查西。</p>
 <h1 id="無線網路"><a href="#無線網路" class="headerlink" title="無線網路"></a>無線網路</h1><p>這裡是用 <code>netctl</code> 這個軟體。還要加上 <code>wpa_supplicant</code> 及 <code>dhcpcd</code> 這兩個相依。</p>
 <p><code>/etc/netctl/{profile name}</code></p>
@@ -43,8 +48,9 @@ Key=\&quot;64cf3ced850ecef39197bb7b7b301fc39437a6aa6c6a599d0534b16af578e04a
 <p>基本上 <code>sudo</code> 是必備的<br><code># pacman -S sudo</code> </p>
 <p>裝好之後用 <code>visudo</code> 進入設定檔<br>把相關設定的註解移除<br>基本上應該是開啟 <code>wheel</code> 或 <code>sudo</code> 這兩個群組的權限，都開也可以。<br>建立這兩個群組<br><code># groupadd sudo</code><br><code># groudadd wheel</code><br>在將自己的使用者加入<br><code># gpasswd -a {user} {group}</code></p>
 <h1 id="最後"><a href="#最後" class="headerlink" title="最後"></a>最後</h1><p>這樣差不多就可以用了，接下來就是安裝自己的環境了。<br>其實 arch wiki 已經寫得很清楚，大部分的資料都看 wiki 就可以解了。</p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>

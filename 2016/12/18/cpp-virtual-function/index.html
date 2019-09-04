@@ -3,22 +3,27 @@
     <head><meta name="generator" content="Hexo 3.8.0">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Jack Shih">
         <link rel="shortcut icon" href="about:blank">
-        <!--        <link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC" rel="stylesheet">-->
         <link rel="stylesheet" href="/style.css">
         <title>Virtual Function in C++ - Code Apprentice</title>
    </head>
     <body>
         <header>
             <h1><a href="/">Code Apprentice</a></h1>
-            <h3><a href="/">Blog</a> <a href="/about/">About</a></h3>
         </header>
+        <nav>
+            <ul>
+                <li><a href="/">Blog</a></li>
+                <li><a href="/about/">About</a></li>
+            </ul>
+        </nav>
         <article>
     <header>
-        <h1>Virtual Function in C++</h1>
+        <h2>Virtual Function in C++</h2>
         <time>2016-12-18</time>
     </header>
-    <p></p><p>最近跟朋友談論到這樣的問題 「解構式應加上 virtual 關鍵字」<br>(TL;DR 如果預期會有人繼承這個物件，請在解構式加上 virtual)</p>
+    <p>最近跟朋友談論到這樣的問題 「解構式應加上 virtual 關鍵字」<br>(TL;DR 如果預期會有人繼承這個物件，請在解構式加上 virtual)</p>
 <p>上網查了一下發現挺有趣的所以在這裡記錄下來。</p>
 <a id="more"></a>
 <p>virtual 關鍵字代表的意思是向其他人暗示，這個 function(method)，”應該”要被子類別覆寫(override)。方式是用子類別也用一樣的 function 名稱。</p>
@@ -53,8 +58,9 @@ ab-&gt;sayHello() &#x2F;&#x2F; hello from A</code></pre>
 <p>另外 C++ 中並沒有像 Java 有所謂 abstract 或是 interface 的關鍵字，而是 pure virtual function。</p>
 <pre><code>virtual function foo() = 0;</code></pre>
 <p>挺有趣。</p>
-<p></p>
+
 </article>
 
+        <footer></footer>
     </body>
 </html>
