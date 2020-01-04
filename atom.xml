@@ -9,6 +9,11 @@
   <updated>2019-09-04T03:01:21.966Z</updated>
   <id>http://randomdize.github.io/</id>
   
+  <author>
+    <name>Jack Shih</name>
+    
+  </author>
+  
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
@@ -56,9 +61,9 @@
     </summary>
     
     
-      <category term="mvc core" scheme="http://randomdize.github.io/tags/mvc-core/"/>
-    
       <category term="asp.net core" scheme="http://randomdize.github.io/tags/asp-net-core/"/>
+    
+      <category term="mvc core" scheme="http://randomdize.github.io/tags/mvc-core/"/>
     
       <category term="javascript" scheme="http://randomdize.github.io/tags/javascript/"/>
     
@@ -435,11 +440,11 @@ var someArray = [1, 2,
     </summary>
     
     
+      <category term="asp.net core" scheme="http://randomdize.github.io/tags/asp-net-core/"/>
+    
       <category term="mvc core" scheme="http://randomdize.github.io/tags/mvc-core/"/>
     
       <category term="c#" scheme="http://randomdize.github.io/tags/c/"/>
-    
-      <category term="asp.net core" scheme="http://randomdize.github.io/tags/asp-net-core/"/>
     
   </entry>
   
