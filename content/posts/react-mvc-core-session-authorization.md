@@ -13,7 +13,7 @@ tags:
 直接參照 M$ 官方網站的教學
 
 在 `startup.cs` 內的 `ConfigureService` 中加入
-```
+```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => {
         options.Cookie.name = "CookieName";
@@ -26,17 +26,16 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         }
     });
 ```
-
 然後在 `Configure` 中加在 `usespaservice` 上面
 
-```
+```csharp
 app.UseAuthentication();
 ```
 
 基本上就跟 MVC 平常一樣。
 
 # 登入
-```
+```csharp
 var claims = new List<Claim>
 {
     new Claim(ClaimTypes.Name, user.Email),
@@ -53,13 +52,13 @@ await HttpContext.SignInAsync(
 ```
 
 # 登出
-```
+```csharp
 await HttpContext.SignOutAsync(
     CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
 # JS fetch
-```
+```js
 fetch(url, {
   credentials: "same-origin"
 }).then(...);
